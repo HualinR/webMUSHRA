@@ -52,41 +52,48 @@ Now you can run webMUSHRA using the following URL: http://localhost:8000
 
 The experiment configurations are stored in the `configs/` folder. To load a configuration/experiment, specify the `config` argument in the url http://localhost:8000/?config=mushra_showresults.yaml. `configs/default.yaml` is the configuration loaded when no config is specified.
 
-### Docker (Updated by Hualin to use it easily)
+
+### Docker (Updated by Hualin to use it smoothly)
 
 You can use docker to set up webMUSHRA quickly. Assume using Ubuntu 22.04.
 
-1. Install docker from https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository
+1. Install and verify docker from https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository by 3 steps
    
 2. Download the code
    
 3. Change to the download directory in terminal
    
 4. Check UID and GID in the terminal by
-   `echo $UID`
-   `echo $GID`
+`echo $UID`
+`echo $GID`
 
-5. If the UID is 1000 and the GID is (blank) then no need to change the `Dockerfile` and `docker-compose.yml`. If they are not, change row 5-7 in `Dockerfile`. GID is at the end of every row. Also change the row 12, 14, 15 in `docker-compose.yml` according to your OS and user setup.
+5. If the UID is 1000 and the GID is (blank) then no need to change the `Dockerfile` and `docker-compose.yml`. If they are not, change row 5-7 in `Dockerfile`. GID is at the end of every row. Also change the row 12, 14, 15 in `docker-compose.yml` according to your OS and user setup. The modifications are based on the [documents](https://ntsim.uk/posts/file-permissisions-when-developing-with-docker).
     
-6. Run
-   `sudo docker-compose -f docker-compose.yml build` to build the webMUSHRA docker container.
+6. Run the command in the terminal to build the webMUSHRA docker container.
 
-7. To run the container use webMUSHRA
-   `sudo docker-compose -f docker-compose.yml up`.
+```sudo docker-compose -f docker-compose.yml build```
 
-8. Open: http://localhost:8000/ in Chrome by reading `default.yaml` in the `configs` folder. Or generate your own test yaml file in the `configs` folder, and then open the webMUSHRA page in the url `http://localhost:8000/?config=YourOwnTest.yaml` 
+7. To run the container use webMUSHRA in the terminal
+
+```sudo docker-compose -f docker-compose.yml up```
+
+8. Open: http://localhost:8000/ in Chrome by reading `./configs/default.yaml`. Or generate your own test yaml file in the `./configs` folder, and then open the webMUSHRA page in the url http://localhost:8000/?config=YourOwnTest.yaml. Don't forget to change the yaml file name in the link.
 
 We configured the docker image so that the `configs` and the `results` folder is mounted inside the container so that you can modify it on the fly and receive results within the `results` folder.
+
 
 #### Note for Docker on Windows
 
 When using Docker Toolbox/Machine on Windows, volume paths (to mount the `configs` and `results` folder) are not converted by default. To enable this conversion set the environment variable COMPOSE_CONVERT_WINDOWS_PATHS=1 e.g. by `env:COMPOSE_CONVERT_WINDOWS_PATHS=1` in the power shell.
 
+
 ### Apache + PHP
 Another custom way to run webMUSHRA would be to install a complete web server stack like [XAMPP](https://www.apachefriends.org/download.html).
 
+
 ### Python Backend
 A python based backend to save the results in provided by [pymushra](https://github.com/nils-werner/pymushra).
+
 
 #### Change or add a configuration
 
@@ -112,10 +119,12 @@ pages:
 
 The specific parameters are described in the [Experimenters Manual](doc/experimenter.md).
 
+
 ## Documentation
 
  * [Experimenters Manual](doc/experimenter.md)
  * [Participants Manual](doc/participant.md)
+
 
 ## Citation
 
@@ -123,11 +132,13 @@ If you use webMUSHRA in your publication, please cite it using the following ref
 
 > Schoeffler, M. et al., (2018). webMUSHRA — A Comprehensive Framework for Web-based Listening Tests. Journal of Open Research Software. 6(1), p.8.
 
+
 ## References
 
 * [Journal of Open Research Software Paper](http://doi.org/10.5334/jors.187)
 * [Web Audio Conference 2015 Paper](http://wac.ircam.fr/pdf/wac15_submission_8.pdf)
 * [Web Audio Conference 2015 Presentation](http://www.audiolabs-erlangen.de/content/resources/webMUSHRA/slides.html#/)
+
 
 ## Copyright/Licence
 
