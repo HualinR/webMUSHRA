@@ -52,12 +52,31 @@ Now you can run webMUSHRA using the following URL: http://localhost:8000
 
 The experiment configurations are stored in the `configs/` folder. To load a configuration/experiment, specify the `config` argument in the url http://localhost:8000/?config=mushra_showresults.yaml. `configs/default.yaml` is the configuration loaded when no config is specified.
 
-### Docker
+### Docker (Updated by Hualin to use it easily)
 
-You can use docker to set up webMUSHRA quickly. Just run
-`docker-compose -f docker-compose.yml build` to build the webMUSHRA docker container.
+You can use docker to set up webMUSHRA quickly. Assume using Ubuntu 22.04.
 
-To run the container use webMUSHRA `docker-compose -f docker-compose.yml up`. We configured the docker image so that the `configs` and the `results` folder is mounted inside the container so that you can modify it on the fly and receive results within the `results` folder.
+1. Install docker from https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository
+   
+2. Download the code
+   
+3. Change to the download directory in terminal
+   
+4. Check UID and GID in the terminal by
+   `echo $UID`
+   `echo $GID`
+
+5. If the UID is 1000 and the GID is (blank) then no need to change the `Dockerfile` and `docker-compose.yml`. If they are not, change row 5-7 in `Dockerfile`. GID is at the end of every row. Also change the row 12, 14, 15 in `docker-compose.yml` according to your OS and user setup.
+    
+6. Run
+   `sudo docker-compose -f docker-compose.yml build` to build the webMUSHRA docker container.
+
+7. To run the container use webMUSHRA
+   `sudo docker-compose -f docker-compose.yml up`.
+
+8. Open: http://localhost:8000/ in Chrome by reading `default.yaml` in the `configs` folder. Or generate your own test yaml file in the `configs` folder, and then open the webMUSHRA page in the url `http://localhost:8000/?config=YourOwnTest.yaml` 
+
+We configured the docker image so that the `configs` and the `results` folder is mounted inside the container so that you can modify it on the fly and receive results within the `results` folder.
 
 #### Note for Docker on Windows
 
