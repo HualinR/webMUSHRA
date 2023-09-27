@@ -9,3 +9,7 @@ services:
       - ./configs:/var/www/html/configs
     ports:
       - "8000:80"
+    user: '1000:1000'
+    environment:
+      APACHE_RUN_USER: '#1000'
+      APACHE_RUN_GROUP: '#1000'
